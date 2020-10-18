@@ -1,0 +1,14 @@
+#Name,Relation,Parent Name, Parent, Name, data of birth(dd/mm/yyy), data of death(dd/mm/yyy or NA)
+Name,Relation,Parent Name,Date of Birth,Date of Death
+Buddy Bing,Parent,,15/6/1860,13/1/1950
+Sue Brown,Children,Buddy Bing,15/6/1981,11/1/2020
+Earl Bing,Children,Buddy Bing,15/6/1993,11/1/1994
+Edd Bing,Children,Buddy Bing,15/6/1980,1/1/19290
+Ted Bing,Children,Buddy Bing,15/6/1986,4/1/2031
+Noah Brown,Children,Sue Brown,13/9/1999,
+Em Brown,Children,Sue Brown,13/9/2004,
+Crystal Bing,Children,Ted Bing,18/6/2230,
+Taylor Bing,Children,Ted Bing,17/7/2026,
+Sarah Bing,Children,Ted Bing, 16/11/2041,
+Brett Sing,Children,Crystal Bing,18/6/2230,19/2/2300
+Manny Sing,Children,Brett Sing,18/6/2270,

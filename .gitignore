@@ -1,0 +1,9 @@
+.idea/*
+venv/Include
+venv/Include/*
+venv/Lib
+venv/Lib/*
+venv/Scritps
+venv/Scripts/*
+pyvenv.cfg
+test.py
