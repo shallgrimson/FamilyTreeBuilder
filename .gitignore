@@ -1,9 +1,5 @@
 .idea/*
-venv/Include
-venv/Include/*
-venv/Lib
-venv/Lib/*
-venv/Scritps
-venv/Scripts/*
+Scripts/
+Lib/
 pyvenv.cfg
 test.py
