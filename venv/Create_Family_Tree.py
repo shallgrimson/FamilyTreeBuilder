@@ -1,17 +1,18 @@
 '''
-About:  Recieve family data in CSV format, save data about each family member and output a print version of the family tree
+About:  -Recieve family data in CSV format, save data about each family member and output a print version of the family tree
+        -Names can be added individually as well
 
 Family Tree Print Output:
 Parent
     Child (Parent to Sub-Child)
         Sub-Child
     Child
+
+Note: doesn't handle duplicate names, could generate unique ID's for this
 '''
+
 import datetime
 import pandas as pd
-
-
-
 
 #########################
 #Get family data from csv file
@@ -27,17 +28,22 @@ def getFamilyData(famTree, path = r'Family_Members.csv'):
         else:
             dateOfDeath = [0,0,0]
 
-        famTree.addMember(Person(name[0], name[1],dateOfBirth,dateOfDeath ))
+        famTree.addMember(Person(name[0], name[1],dateOfBirth,dateOfDeath))
+
         if row["Relation"].lower() == "parent":
             famTree.addParent(famTree.getMemeber(row["Name"]))
 
         if row["Relation"].lower() == "children":
             famTree.addChild(famTree.getMemeber(row["Name"]), famTree.getMemeber(row["Parent Name"]))
 
+
+
 class FamilyTree:
     tree = dict() #Dictionary holding relations
     treeList = [] #List holding all members
     indexOldest = 0
+    headPerson = "" #Oldest person at the top of the tree
+
     def addMember(self, newMember):
         self.treeList.append(newMember)
 
@@ -45,6 +51,7 @@ class FamilyTree:
         for person in self.treeList:
             if findName == str(person):
                 return person
+        return None
 
     def addChild(self, child, parent):
         if parent in self.tree:
@@ -53,6 +60,7 @@ class FamilyTree:
             self.tree[parent] = [child]
 
     def addParent(self, parent):
+        self.headPerson = parent
         self.tree[parent] = []
 
     def printSubTree(self, parent, tabs=""):
@@ -64,7 +72,7 @@ class FamilyTree:
                 print(tabs+"   "+ str(child))
 
     def printFullTree(self):
-        self.printSubTree(self.treeList[0])
+        self.printSubTree(self.headPerson)
 
 class Person:
     def __init__(self, fname, lname, dateofbirth, dateofdeath =[0,0,0]):
@@ -75,6 +83,9 @@ class Person:
 
     def __str__(self):
         return " ".join([self.fname, self.lname]);
+
+    def getID(self):
+        return self.ID
 
     def dateOfBirth(self):
         return '/'.join(str(i) for i in [self.birthDay, self.birthMonth, self.birthYear])
@@ -97,7 +108,8 @@ if __name__ == "__main__":
 
     famTree = FamilyTree()
     getFamilyData(famTree)
-    famTree.printSubTree(FamilyTree.treeList[4])  #Print full tree
-    #famTree.printFullTree()
+    famTree.printSubTree(famTree.getMemeber("Ted Bing"))  #Print sub tree
+    print("\n \n")
+    famTree.printFullTree()
 
 
